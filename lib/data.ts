@@ -164,21 +164,21 @@ export const PROJECTS: Project[] = [
     imageUrl:
       '/assets/yt-downloader.png',
     tags: ['Python', 'Web Scrapping', 'Multimedia Processing', 'GUI'],
-    githubUrl: 'https://https://github.com/ardhikaptr11/yt-song-downloader',
+    githubUrl: 'https://github.com/ardhikaptr11/yt-song-downloader',
   },
 ];
 
 export const SKILLS: Skill[] = [
   { name: 'Python', icon: 'code', level: 90 },
-  { name: 'JavaScript', icon: 'code', level: 80 },
+  { name: 'JavaScript', icon: 'code', level: 85 },
   { name: 'React', icon: 'component', level: 75 },
-  { name: 'HTML', icon: 'code', level: 75 },
+  { name: 'HTML', icon: 'code', level: 85 },
   { name: 'Tailwind CSS', icon: 'palette', level: 70 },
   { name: 'TypeScript', icon: 'file-code', level: 30 },
   { name: 'REST API', icon: 'git-branch', level: 80 },
   { name: 'Next.js', icon: 'server', level: 50 },
   { name: 'Node.js', icon: 'server', level: 80 },
-  { name: 'GCP', icon: 'cloud', level: 75 },
+  { name: 'GCP', icon: 'cloud', level: 65 },
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
