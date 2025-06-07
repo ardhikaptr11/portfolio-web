@@ -29,26 +29,6 @@ export function ComingSoonPage() {
 		return () => clearInterval(interval);
 	}, []);
 
-  return (
-    <div className="relative h-screen w-full flex flex-col items-center justify-center bg-primary-foreground text-center px-5 overflow-hidden gap-6">
-      <div className="z-50 flex flex-col w-full h-full">
-        <div className="ml-auto p-2">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.5 }}
-          >
-            <ThemeToggle />
-          </motion.div>
-        </div>
-        <div className="flex flex-col justify-center h-full ">
-          <img
-            src="/assets/image.png"
-            alt="Coders at work"
-            className="size-60 sm:size-75 md:size-90 mx-auto"
-          />
-          <h1 className="text-5xl">Coders At Work</h1>
-          <p>Stay tuned for something amazing!</p>
 	return (
 		<div className="relative h-screen w-full flex flex-col items-center justify-center bg-primary-foreground text-center px-5 overflow-hidden gap-6">
 			<div className="z-50 flex flex-col w-full h-full">
