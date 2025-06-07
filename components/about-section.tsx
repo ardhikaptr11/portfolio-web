@@ -70,6 +70,7 @@ function Experience() {
 								theme === "light" ? "0.4rem solid #9ca3af" : "0.4rem solid rgba(255, 255, 255, 0.5)"
 						}}
 						date={data.date}
+						dateClassName="mr-4"
 						icon={getIconComponent(data.icon)}
 						iconStyle={{
 							background: theme === "light" ? "#f3f4f6" : "#2d3b55",
@@ -109,7 +110,7 @@ function Experience() {
 								className={buttonVariants({
 									variant: "default",
 									className:
-										"w-full md:w-auto rounded-sm ml-4 bg-transparent text-white min-[1170px]:bg-primary min-[1170px]:ml-0 min-[1170px]:text-primary-foreground"
+										"rounded-sm ml-0 bg-transparent text-secondary-foreground py-[10.4px] !px-0 min-[1170px]:bg-primary min-[1170px]:!px-4 min-[1170px]:ml-6 min-[1170px]:text-primary-foreground"
 								})}>
 								<ExternalLink className="mr-2 h-4 w-4" />
 								{data.title.includes("Bachelor") ? "Final Project" : "Certificate"}
@@ -189,7 +190,7 @@ export function AboutSection() {
 						whileInView="show"
 						viewport={{ once: true, margin: "-100px" }}
 						className="space-y-4">
-						<h3 className="text-xl font-semibold mb-4">Skills</h3>
+						<h3 className="text-xl font-semibold mb-4">Tech Stack</h3>
 						<div className="space-y-4">
 							{SKILLS.map((skill) => (
 								<motion.div key={skill.name} variants={item} className="space-y-2">
