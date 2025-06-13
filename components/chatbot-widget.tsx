@@ -7,13 +7,13 @@ import { X } from "lucide-react";
 
 export function ChatbotWidget() {
 	const [open, setOpen] = useState(false);
-	const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat();
+	const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({ api: "/api/chat" });
 
 	return (
 		<Dialog.Root open={open} onOpenChange={setOpen}>
 			<Dialog.Trigger asChild>
 				<button className="fixed bottom-4 right-4 w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center shadow-lg z-50 hover:bg-blue-700 transition">
-					💬
+					🤖
 				</button>
 			</Dialog.Trigger>
 
