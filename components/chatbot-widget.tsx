@@ -11,7 +11,15 @@ export function ChatbotWidget() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [dots, setDots] = useState(1);
 
-	const { messages, input, setInput, append } = useChat();
+	const { messages, input, setInput, append } = useChat({
+		initialMessages: [
+			{
+				id: "initial-message",
+				role: "assistant",
+				content: "Hi, I'm here to assist you in getting to know Ardhika more efficiently."
+			}
+		]
+	});
 
 	const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -27,15 +35,6 @@ export function ChatbotWidget() {
 			scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
 		}
 	}, [messages, isLoading]);
-
-	useEffect(() => {
-		if (open && messages.length === 0) {
-			append({
-				role: "assistant",
-				content: "Hi, I'm here to assist you in getting to know Ardhika more efficiently."
-			});
-		}
-	}, [open]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
