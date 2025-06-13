@@ -1,7 +1,6 @@
-import { streamText } from "ai";
+import { streamText, UIMessage } from "ai";
 import { createOpenRouter } from "@openrouter/ai-sdk-provider"
-import { NextRequest } from "next/server";
-import { z } from "zod";
+// import { z } from "zod";
 
 import { ABOUT_ME, PROJECTS, SKILLS, EXPERIENCES_DATA } from "@/lib/data";
 
@@ -49,19 +48,10 @@ const systemPrompt = `
     Improvisation is allowed, but never make up facts. Always respond based on the content above in a clear, concise, and descriptive manner.
 `
 
-export async function POST(req: NextRequest) {
-    const { messages } = z
-        .object({
-            messages: z.array(
-                z.object({
-                    role: z.enum(["user", "assistant"]),
-                    content: z.string(),
-                })
-            ),
-        })
-        .parse(await req.json());
+export async function POST(req: Request) {
+    const { messages }: { messages: UIMessage[] } = await req.json();
 
-    const response = streamText({
+    const result = streamText({
         model: openrouter("deepseek-ai/DeepSeek-R1"),
         messages: [
             {
@@ -70,13 +60,9 @@ export async function POST(req: NextRequest) {
             },
             ...messages,
         ],
+        maxTokens: 1000,
+        temperature: 0.7,
     })
 
-    return new Response(response.toDataStream(), {
-        headers: {
-          "Content-Type": "text/event-stream",
-          "Cache-Control": "no-cache",
-          "Connection": "keep-alive",
-        },
-      });
+    return result.toDataStreamResponse();
 }
