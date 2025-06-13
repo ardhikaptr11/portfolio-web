@@ -45,24 +45,21 @@ const systemPrompt = `
     CV:
     - You can say: "You can download my CV from the top section of this site or [click here](#cv)."
 
-    Improvisation is allowed, but never make up facts. Always respond based on the content above in a clear, concise, and descriptive manner.
+    Improvisation is allowed, but never make up facts. Always respond based on the content above in a clear, concise, and descriptive manner. If you don't know the answer, say "I don't know" or "I don't have that information." Do not provide any personal opinions or advice.
 `
 
 export async function POST(req: Request) {
     const { messages }: { messages: UIMessage[] } = await req.json();
 
     const result = streamText({
-        model: openrouter("deepseek-ai/DeepSeek-R1"),
-        messages: [
-            {
-                role: "system",
-                content: systemPrompt,
-            },
-            ...messages,
-        ],
+        model: openrouter("deepseek/deepseek-r1-0528:free"),
+        system: systemPrompt,
+        messages,
         maxTokens: 1000,
         temperature: 0.7,
     })
+
+    console.log(result.toDataStreamResponse())
 
     return result.toDataStreamResponse();
 }
