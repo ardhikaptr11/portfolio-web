@@ -72,5 +72,11 @@ export async function POST(req: NextRequest) {
         ],
     })
 
-    return response.toDataStream()
+    return new Response(response.toDataStream(), {
+        headers: {
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          "Connection": "keep-alive",
+        },
+      });
 }
