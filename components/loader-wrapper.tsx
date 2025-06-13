@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Loader from "./screen-loader";
-import { DevToolsDetector } from "@/components/devtools-detector";
+// import { DevToolsDetector } from "@/components/devtools-detector";
 
 interface LoaderWrapperProps {
 	children: React.ReactNode;
@@ -32,7 +32,7 @@ const LoaderWrapper = ({ children }: { children: React.ReactNode }) => {
 
 	return (
 		<>
-			<DevToolsDetector />
+			{/* <DevToolsDetector /> */}
 			{children}
 		</>
 	);
