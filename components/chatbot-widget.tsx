@@ -17,10 +17,25 @@ export function ChatbotWidget() {
 
 	useEffect(() => {
 		const interval = setInterval(() => {
-		  setDots((d) => (d === 3 ? 1 : d + 1));
+			setDots((d) => (d === 3 ? 1 : d + 1));
 		}, 500);
 		return () => clearInterval(interval);
-	  }, []);
+	}, []);
+
+	useEffect(() => {
+		if (scrollRef.current) {
+			scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+		}
+	}, [messages, isLoading]);
+
+	useEffect(() => {
+		if (open && messages.length === 0) {
+			append({
+				role: "assistant",
+				content: "Say hi and introduce yourself as an assistant for Ardhika's portfolio."
+			});
+		}
+	}, [open]);
 
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
@@ -31,12 +46,6 @@ export function ChatbotWidget() {
 		setInput("");
 		setIsLoading(false);
 	};
-
-	useEffect(() => {
-		if (scrollRef.current) {
-			scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-		}
-	}, [messages, isLoading]);
 
 	return (
 		<Dialog.Root open={open} onOpenChange={setOpen}>
@@ -49,7 +58,7 @@ export function ChatbotWidget() {
 			<Dialog.Portal>
 				<Dialog.Overlay className="fixed inset-0 bg-black/30 z-40" />
 				<Dialog.Content
-					className="fixed w-full h-full top-0 rounded-none md:bottom-20 md:right-4 md:w-[22rem] md:max-h-[75vh] md:rounded-lg bg-primary-foreground shadow-xl flex flex-col z-99 md:z-50"
+					className="fixed w-full h-full top-0 rounded-none md:top-20 md:bottom-20 md:right-4 md:w-[22rem] md:max-h-[75vh] md:rounded-lg bg-primary-foreground shadow-xl flex flex-col z-99 md:z-50"
 					aria-describedby="chatbot-dialog">
 					<div className="flex items-center justify-between p-3">
 						<Dialog.Title className="text-lg font-semibold">Chatbot</Dialog.Title>
@@ -62,18 +71,16 @@ export function ChatbotWidget() {
 
 					<div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-2 space-y-2 text-sm">
 						{messages.map((m) => (
-							<div
-								key={m.id}
-								className={`p-2 rounded ${
-									m.role === "user"
-										? "bg-secondary text-right ml-auto w-fit"
-										: "bg-secondary text-left mr-auto w-fit"
-								}`}>
+							<div key={m.id} className={`${m.role === "user" ? "ml-auto" : "mr-auto"}`}>
 								{typeof m.content === "string" ? (
-									<div className="flex flex-col gap-2 text-sm">
-										<h3 className="font-semibold">{m.role === "user" ? "You" : "Assistant"}</h3>
-										<ReactMarkdown>{m.content}</ReactMarkdown>
-									</div>
+									<>
+										<h3 className="font-semibold text-right mb-2">
+											{m.role === "user" ? "You" : "Assistant"}
+										</h3>
+										<div className="text-sm p-2 rounded bg-secondary text-right">
+											<ReactMarkdown>{m.content}</ReactMarkdown>
+										</div>
+									</>
 								) : (
 									(m.content as Array<{ type: string; text?: string }>).map((part, index) =>
 										part.type === "text" ? <div key={index}>{part.text}</div> : null
@@ -85,7 +92,7 @@ export function ChatbotWidget() {
 							<div className="p-2 rounded bg-secondary text-left mr-auto w-fit">
 								<div className="flex items-center gap-2">
 									<Loader2 className="animate-spin w-4 h-4" />
-									<span>{`Loading${'.'.repeat(dots)}`}</span>
+									<span>{`Loading${".".repeat(dots)}`}</span>
 								</div>
 							</div>
 						)}
@@ -99,10 +106,7 @@ export function ChatbotWidget() {
 							placeholder="Ask me about him..."
 							disabled={isLoading}
 						/>
-						<button
-							type="submit"
-							className="px-3 py-1 rounded text-sm"
-							disabled={isLoading}>
+						<button type="submit" className="px-3 py-1 rounded text-sm" disabled={isLoading}>
 							{isLoading ? <Loader2 className="animate-spin w-4 h-4" /> : "Send"}
 						</button>
 					</form>
