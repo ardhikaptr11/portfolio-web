@@ -57,7 +57,11 @@ export function ChatbotWidget() {
 										? "bg-background text-right ml-auto max-w-[85%]"
 										: "bg-background text-left mr-auto max-w-[85%]"
 								}`}>
-								{m.content}
+								{typeof m.content === "string"
+									? m.content
+									: (m.content as Array<{ type: string; text?: string }>).map((part, index) =>
+											part.type === "text" ? <div key={index}>{part.text}</div> : null
+									  )}
 							</div>
 						))}
 						{isLoading && (
