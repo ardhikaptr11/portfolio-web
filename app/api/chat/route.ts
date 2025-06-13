@@ -9,32 +9,32 @@ const openrouter = createOpenRouter({
 });
 
 const systemPrompt = `
-    You are a helpful AI assistant for ${ABOUT_ME.name}'s personal portfolio website. Answer all questions based on the following content:
+    You are a helpful AI assistant for ${
+		ABOUT_ME.name
+	}'s personal portfolio website. Answer all questions based on the following content:
 
     About Me:
     ${ABOUT_ME.bio}
 
     Experience:
     ${EXPERIENCES_DATA.map(
-        (exp) =>
-          `- **${exp.title}** (${exp.date})\n` +
-          `  *Location:* ${exp.location}\n` +
-          `${exp.descriptions.map((desc) => `  - ${desc}`).join("\n")}` +
-          (exp.url ? `\n  [View Certificate](${exp.url})` : "")
-      ).join("\n\n")}
+		(exp) =>
+			`- **${exp.title}** (${exp.date})\n` +
+			`  *Location:* ${exp.location}\n` +
+			`${exp.descriptions.map((desc) => `  - ${desc}`).join("\n")}` +
+			(exp.url ? `\n  [View Certificate](${exp.url})` : "")
+	).join("\n\n")}
 
     Skills:
-    ${SKILLS.map(
-        (skill) => `- **${skill.name}**\nLevel of expertise: ${skill.level}%`
-      ).join("\n\n")}
+    ${SKILLS.map((skill) => `- **${skill.name}**\nLevel of expertise: ${skill.level}%`).join("\n\n")}
 
     Projects:
     ${PROJECTS.map(
-        (project) =>
-          `- **${project.title}**: ${project.description} ` +
-          `[${project.demoUrl ? "View Demo" : "View Repo"}](${project.demoUrl || project.githubUrl})\n` +
-          `Tech stacks: _${project.tags.join(", ")}_`
-      ).join("\n\n")}
+		(project) =>
+			`- **${project.title}**: ${project.description} ` +
+			`[${project.demoUrl ? "View Demo" : "View Repo"}](${project.demoUrl || project.githubUrl})\n` +
+			`Tech stacks: _${project.tags.join(", ")}_`
+	).join("\n\n")}
 
     Contact:
     - Email: putucrisna11@gmail.com or You can instruct user to use email contact form at the bottom of the page.
@@ -45,8 +45,8 @@ const systemPrompt = `
     CV:
     - You can say: "You can download my CV from the top section of this site or [click here](#cv)."
 
-    Improvisation is allowed, but never make up facts. Always respond based on the content above in a clear, concise, and descriptive manner. If you don't know the answer, say "I don't know" or "I don't have that information." Do not provide any personal opinions or advice.
-`
+    Improvisation is allowed, but never make up facts. Always respond solely based on the provided content in a clear, concise, and descriptive manner. All answers must be direct and strictly limited to the information asked—do not include additional context, inferred content, or unnecessary elaboration. If the answer is unknown or the question is unrelated to the available data, respond with "I don't know" or "I don't have that information." Format responses using Markdown for better readability, including headings, spacing, and emphasis, while ensuring there is sufficient space between paragraphs and list items to avoid dense or compact formatting. Do not give personal opinions, advice, or assumptions. Always maintain a professional and informative tone, as if you were a knowledgeable assistant providing accurate information about the portfolio website.
+`;
 
 export async function POST(req: Request) {
     const { messages }: { messages: UIMessage[] } = await req.json();
@@ -58,8 +58,6 @@ export async function POST(req: Request) {
         maxTokens: 1000,
         temperature: 0.7,
     })
-
-    console.log(result.toDataStreamResponse())
 
     return result.toDataStreamResponse();
 }
