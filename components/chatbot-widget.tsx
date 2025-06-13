@@ -4,6 +4,7 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { useState, useEffect, useRef } from "react";
 import { useChat } from "@ai-sdk/react";
 import { X, Loader2 } from "lucide-react";
+import ReactMarkdown from "react-markdown";
 
 export function ChatbotWidget() {
 	const [open, setOpen] = useState(false);
@@ -26,7 +27,7 @@ export function ChatbotWidget() {
 		if (scrollRef.current) {
 			scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
 		}
-	}, [messages]);
+	}, [messages, isLoading]);
 
 	return (
 		<Dialog.Root open={open} onOpenChange={setOpen}>
@@ -57,11 +58,15 @@ export function ChatbotWidget() {
 										? "bg-background text-right ml-auto max-w-[85%]"
 										: "bg-background text-left mr-auto max-w-[85%]"
 								}`}>
-								{typeof m.content === "string"
-									? m.content
-									: (m.content as Array<{ type: string; text?: string }>).map((part, index) =>
-											part.type === "text" ? <div key={index}>{part.text}</div> : null
-									  )}
+								{typeof m.content === "string" ? (
+									<div className="prose text-sm">
+										<ReactMarkdown>{m.content}</ReactMarkdown>
+									</div>
+								) : (
+									(m.content as Array<{ type: string; text?: string }>).map((part, index) =>
+										part.type === "text" ? <div key={index}>{part.text}</div> : null
+									)
+								)}
 							</div>
 						))}
 						{isLoading && (
