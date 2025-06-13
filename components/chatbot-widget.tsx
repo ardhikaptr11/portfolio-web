@@ -32,7 +32,7 @@ export function ChatbotWidget() {
 		if (open && messages.length === 0) {
 			append({
 				role: "assistant",
-				content: "Say hi and introduce yourself as an assistant for Ardhika's portfolio."
+				content: "Hi, I'm here to assist you in getting to know Ardhika more efficiently."
 			});
 		}
 	}, [open]);
@@ -69,15 +69,21 @@ export function ChatbotWidget() {
 						</Dialog.Close>
 					</div>
 
-					<div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-2 space-y-2 text-sm">
+					<div ref={scrollRef} className="flex-1 overflow-y-auto px-3 py-2 space-y-6 text-sm">
 						{messages.map((m) => (
 							<div key={m.id} className={`${m.role === "user" ? "ml-auto" : "mr-auto"}`}>
 								{typeof m.content === "string" ? (
 									<>
-										<h3 className="font-semibold text-right mb-2">
+										<h3
+											className={`font-semibold ${
+												m.role === "user" ? "text-right" : "text-left"
+											} mb-2`}>
 											{m.role === "user" ? "You" : "Assistant"}
 										</h3>
-										<div className="text-sm p-2 rounded bg-secondary text-right">
+										<div
+											className={`text-sm p-2 rounded bg-secondary ${
+												m.role === "user" ? "text-right" : "text-left"
+											} flex flex-col gap-4`}>
 											<ReactMarkdown>{m.content}</ReactMarkdown>
 										</div>
 									</>
@@ -103,7 +109,7 @@ export function ChatbotWidget() {
 							value={input}
 							onChange={(e) => setInput(e.target.value)}
 							className="flex-1 rounded px-2 py-1 text-sm"
-							placeholder="Ask me about him..."
+							placeholder="Ask me about anything related to him"
 							disabled={isLoading}
 						/>
 						<button type="submit" className="px-3 py-1 rounded text-sm" disabled={isLoading}>
