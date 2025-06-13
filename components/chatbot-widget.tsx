@@ -39,7 +39,7 @@ export function ChatbotWidget() {
 
 			<Dialog.Portal>
 				<Dialog.Overlay className="fixed inset-0 bg-black/30 z-40" />
-				<Dialog.Content className="fixed bottom-20 right-4 w-[22rem] max-h-[75vh] rounded-lg bg-white shadow-xl flex flex-col z-50">
+				<Dialog.Content className="fixed bottom-20 right-4 w-[22rem] max-h-[75vh] rounded-lg bg-white shadow-xl flex flex-col z-50" aria-describedby="chatbot-dialog">
 					<div className="flex items-center justify-between p-3 border-b">
 						<Dialog.Title className="text-lg font-semibold">Chatbot</Dialog.Title>
 						<Dialog.Close asChild>
