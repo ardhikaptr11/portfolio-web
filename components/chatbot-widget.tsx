@@ -16,7 +16,7 @@ export function ChatbotWidget() {
 			{
 				id: "initial-message",
 				role: "assistant",
-				content: "Hi, I'm here to assist you in getting to know Ardhika more efficiently."
+				content: "Hi, I'm here to assist you in getting to know Ardhika more efficiently. How can I help?"
 			}
 		]
 	});
@@ -80,8 +80,8 @@ export function ChatbotWidget() {
 											{m.role === "user" ? "You" : "Assistant"}
 										</h3>
 										<div
-											className={`text-sm p-2 rounded bg-secondary ${
-												m.role === "user" ? "text-right" : "text-left"
+											className={`w-fit text-sm p-2 rounded bg-secondary ${
+												m.role === "user" ? "text-right ml-auto" : "text-left"
 											} flex flex-col gap-4`}>
 											<ReactMarkdown>{m.content}</ReactMarkdown>
 										</div>
