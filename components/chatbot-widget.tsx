@@ -16,7 +16,7 @@ export function ChatbotWidget() {
 			{
 				id: "initial-message",
 				role: "assistant",
-				content: "Hi, I'm here to assist you in getting to know Ardhika more efficiently. How can I help?"
+				content: "Hi, I'm ARIS — Ardhika's Intelligent Support. I'm here to assist you in getting to know Ardhika more efficiently. How can I help?"
 			}
 		]
 	});
@@ -40,17 +40,17 @@ export function ChatbotWidget() {
 		e.preventDefault();
 		if (!input.trim()) return;
 
+		setInput("");
 		setIsLoading(true);
 		await append({ content: input, role: "user" });
-		setInput("");
 		setIsLoading(false);
 	};
 
 	return (
 		<Dialog.Root open={open} onOpenChange={setOpen}>
 			<Dialog.Trigger asChild>
-				<button className="fixed bottom-4 right-4 w-14 h-14 rounded-full bg-muted flex items-center justify-center shadow-lg z-50 md:z-99 hover:bg-muted/80 transition-colors duration-200">
-					🤖
+				<button className="fixed bottom-4 right-4 w-10 h-10 rounded-full bg-muted flex items-center justify-center shadow-lg z-50 md:z-99 hover:bg-muted/80 transition-colors duration-200">
+					<img src="/assets/bot.png" alt="ARIS Bot"/>
 				</button>
 			</Dialog.Trigger>
 
