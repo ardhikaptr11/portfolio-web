@@ -200,7 +200,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1 }}
-        className="absolute bottom-8 left-0 right-0 flex justify-center z-99"
+        className="absolute bottom-8 left-0 right-0 flex justify-center z-50"
       >
         <motion.div
           animate={{ y: [0, 10, 0] }}
