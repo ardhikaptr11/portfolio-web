@@ -104,6 +104,16 @@ export const EXPERIENCES_DATA: ExperiencesData[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: 'nightflix-movie',
+    title: 'Nightflix',
+    description: "A movie discovery platform that allows users to search and view details about movies.",
+    imageUrl:
+      '/assets/nightflix-movie.png',
+    tags: ['React', 'Tailwind CSS', 'API Integration', 'TMDB API', 'Frontend'],
+    demoUrl: 'https://nightflix-movie.vercel.app',
+    githubUrl: 'https://github.com/ardhikaptr11/nightflix',
+  },
+  {
     id: 'portfolio-web',
     title: 'Portfolio Web V1',
     description:
