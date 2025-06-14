@@ -95,7 +95,7 @@ export function ChatbotWidget() {
 							</div>
 						))}
 						{isLoading && (
-							<div className="p-2 rounded bg-secondary text-left mr-auto max-w-[105px">
+							<div className="p-2 rounded bg-secondary text-left mr-auto max-w-[105px]">
 								<div className="flex items-center gap-2">
 									<Loader2 className="animate-spin w-4 h-4" />
 									<span>{`Loading${".".repeat(dots)}`}</span>
